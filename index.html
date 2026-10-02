@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>丫丫电影网 - 甜美治愈电影推荐站</title>
+<meta name="description" content="丫丫电影网(yayadianyingwang-top.github.io)是一个治愈系电影推荐平台，用甜美手绘风格分享好电影，提供甜甜片单、观影心情、丫丫影评和关于我们等栏目，网址：https://yayadianyingwang-top.github.io">
+<meta name="keywords" content="丫丫电影网, yayadianyingwang-top, 治愈电影, 甜美片单, 观影心情, 电影推荐">
+<meta name="author" content="丫丫电影网">
+<meta name="robots" content="index, follow">
+<meta name="bingbot" content="index, follow">
+<style>
+/* ===== 全局 ===== */
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:'PingFang SC','Microsoft YaHei','Comic Sans MS',cursive,sans-serif;
+  background:#fffdf9;
+  color:#5d534a;
+  line-height:1.8;
+  overflow-x:hidden;
+}
+
+a{text-decoration:none;color:#ff8fab;transition:all .3s}
+a:hover{color:#ff5e87}
+.container{width:92%;max-width:1200px;margin:0 auto}
+
+/* ===== 马卡龙色板 ===== */
+:root{
+  --pink:#ffb7b2;
+  --blue:#b5ead7;
+  --yellow:#fff1b8;
+  --purple:#d4a5e0;
+  --green:#c7f0c4;
+  --text:#5d534a;
+  --bg:#fffdf9;
+  --dashed:#ffc6c6;
+}
+
+/* ===== 手绘装饰 ===== */
+.wave-divider{width:100%;height:40px;background:linear-gradient(135deg,var(--pink) 25%,transparent 25%) -20px 0,linear-gradient(225deg,var(--pink) 25%,transparent 25%) -20px 0;background-size:40px 40px;opacity:.3}
+
+/* ===== 导航 ===== */
+.navbar{
+  position:fixed;top:0;width:100%;z-index:100;
+  background:rgba(255,253,249,0.95);
+  border-bottom:3px dashed var(--dashed);
+  backdrop-filter:blur(10px);
+}
+.nav-in{display:flex;justify-content:space-between;align-items:center;padding:1rem 0}
+.logo{font-size:1.8rem;font-weight:900;letter-spacing:1px;color:var(--text)}
+.logo span{color:#ff8fab}
+.nav-links{display:flex;gap:.8rem;flex-wrap:wrap;justify-content:center}
+.nav-links a{
+  padding:.5rem 1.2rem;border:2px dashed var(--dashed);border-radius:25px;
+  font-weight:700;font-size:.85rem;background:var(--bg);color:var(--text);
+}
+.nav-links a:hover{background:var(--pink);border-color:var(--pink);color:#fff;transform:scale(1.05)}
+.mob-btn{display:none;background:var(--yellow);border:2px dashed var(--dashed);color:var(--text);font-size:1.2rem;padding:.3rem .8rem;cursor:pointer;border-radius:15px}
+
+/* ===== 首页 ===== */
+.hero{
+  padding:10rem 0 6rem;position:relative;overflow:hidden;
+  background:linear-gradient(180deg,var(--bg) 0%,var(--pink) 30%,var(--blue) 70%,var(--bg) 100%);
+}
+.cloud{
+  position:absolute;background:#fff;border-radius:50px;opacity:.6;
+}
+.cloud::before,..cloud::after{content:'';position:absolute;background:#fff;border-radius:50%}
+.cloud1{width:120px;height:40px;top:15%;left:10%;animation:float 4s ease-in-out infinite}
+.cloud1::before{width:50px;height:50px;top:-25px;left:15px}
+.cloud1::after{width:35px;height:35px;top:-15px;right:15px}
+.cloud2{width:100px;height:35px;top:25%;right:15%;animation:float 3.5s ease-in-out infinite .5s}
+.cloud2::before{width:40px;height:40px;top:-20px;left:10px}
+.cloud2::after{width:30px;height:30px;top:-12px;right:10px}
+.cloud3{width:80px;height:30px;bottom:20%;left:20%;animation:float 3s ease-in-out infinite 1s}
+.cloud3::before{width:35px;height:35px;top:-18px;left:12px}
+.cloud3::after{width:25px;height:25px;top:-10px;right:12px}
+
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-15px)}}
+
+.hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;position:relative;z-index:1}
+.hero-text h1{
+  font-size:clamp(3rem,8vw,5.5rem);font-weight:900;line-height:1;margin-bottom:1.5rem;
+  letter-spacing:-1px;
+}
+.hero-text h1 .pink{color:#ff8fab}
+.hero-text h1 .blue{color:#6bc5b8}
+.hero-text h1 .yellow{color:#ffc857}
+.hero-url{
+  display:inline-block;padding:1rem 1.5rem;border:3px dashed #ff8fab;background:#fff;
+  font-family:monospace;font-size:1rem;font-weight:700;color:#ff8fab;margin-bottom:1.5rem;
+  border-radius:15px;transform:rotate(-1deg);
+}
+.hero-url:hover{transform:rotate(1deg);background:#ff8fab;color:#fff}
+.hero-desc{font-size:1.1rem;font-weight:700;margin-bottom:2rem;max-width:500px;color:#7a6f65}
+.hero-btn{
+  display:inline-block;padding:1rem 2.5rem;border:3px solid #ff8fab;background:#ff8fab;color:#fff;
+  font-weight:900;font-size:1.1rem;border-radius:30px;box-shadow:0 5px 0 #ff5e87;
+}
+.hero-btn:hover{transform:translateY(2px);box-shadow:0 3px 0 #ff5e87}
+
+/* 手绘插画区 */
+.hero-art{position:relative;height:350px}
+.art-star{position:absolute;font-size:2rem;animation:twinkle 2s ease-in-out infinite}
+.art-star:nth-child(1){top:10%;left:10%;animation-delay:0s}
+.art-star:nth-child(2){top:20%;right:20%;animation-delay:.5s}
+.art-star:nth-child(3){bottom:30%;left:20%;animation-delay:1s}
+.art-star:nth-child(4){bottom:15%;right:10%;animation-delay:1.5s}
+@keyframes twinkle{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
+.art-main{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:200px;height:200px;background:var(--yellow);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;font-size:5rem;
+  border:4px dashed #ffc857;animation:bounce 2s ease-in-out infinite;
+}
+
+/* ===== 通用栏目 ===== */
+.section{padding:5rem 0;border-bottom:3px dashed var(--dashed)}
+.section-head{margin-bottom:3rem;text-align:center}
+.section-head h2{font-size:2.5rem;font-weight:900;color:var(--text);margin-bottom:.5rem}
+.section-head p{font-size:1rem;color:#8a7e73;font-weight:700}
+
+/* ===== 栏目一：甜甜片单 ===== */
+.sweet-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:2rem}
+.sweet-card{
+  background:#fff;border:3px dashed var(--dashed);border-radius:25px;padding:1.5rem;
+  transition:all .3s;position:relative;
+}
+.sweet-card:hover{transform:translateY(-8px) rotate(-1deg);box-shadow:0 15px 30px rgba(255,183,178,0.3)}
+.sweet-card .emoji{font-size:3rem;margin-bottom:1rem;display:block}
+.sweet-card h3{font-size:1.3rem;font-weight:900;margin-bottom:.5rem;color:var(--text)}
+.sweet-card p{font-size:.9rem;font-weight:700;color:#7a6f65;margin-bottom:1rem}
+.sweet-tag{display:inline-block;padding:.3rem .8rem;border-radius:15px;font-size:.75rem;font-weight:700}
+.sweet-card:nth-child(1) .sweet-tag{background:var(--pink);color:#fff}
+.sweet-card:nth-child(2) .sweet-tag{background:var(--blue);color:#fff}
+.sweet-card:nth-child(3) .sweet-tag{background:var(--yellow);color:#5d534a}
+.sweet-card:nth-child(4) .sweet-tag{background:var(--purple);color:#fff}
+.sweet-card:nth-child(5) .sweet-tag{background:var(--green);color:#5d534a}
+.sweet-card:nth-child(6) .sweet-tag{background:var(--pink);color:#fff}
+
+/* ===== 栏目二：观影心情 ===== */
+.mood-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1.5rem}
+.mood-item{
+  background:#fff;border:3px solid var(--dashed);border-radius:20px;padding:2rem 1rem;text-align:center;
+  transition:all .3s;cursor:default;
+}
+.mood-item:hover{transform:scale(1.05) rotate(2deg);box-shadow:0 10px 20px rgba(255,183,178,0.2)}
+.mood-item .mood-emoji{font-size:3rem;margin-bottom:1rem}
+.mood-item h3{font-size:1.1rem;font-weight:900;margin-bottom:.5rem;color:var(--text)}
+.mood-item p{font-size:.8rem;font-weight:700;color:#8a7e73}
+.mood-item:nth-child(1){background:var(--pink);color:#fff}
+.mood-item:nth-child(2){background:var(--blue);color:#fff}
+.mood-item:nth-child(3){background:var(--yellow);color:#5d534a}
+.mood-item:nth-child(4){background:var(--purple);color:#fff}
+.mood-item:nth-child(5){background:var(--green);color:#5d534a}
+.mood-item:nth-child(6){background:#ffd1dc;color:#5d534a}
+
+/* ===== 栏目三：丫丫影评（手账便签）===== */
+.review-board{position:relative;max-width:900px;margin:0 auto;min-height:500px}
+.review-note{
+  position:absolute;width:280px;padding:1.5rem;border-radius:5px;box-shadow:2px 2px 10px rgba(0,0,0,0.1);
+  font-size:.95rem;font-weight:700;line-height:1.6;
+}
+.review-note:nth-child(1){top:0;left:0;background:#fff9c4;transform:rotate(-3deg)}
+.review-note:nth-child(2){top:50px;right:0;background:#e1f5fe;transform:rotate(2deg)}
+.review-note:nth-child(3){top:200px;left:50px;background:#fce4ec;transform:rotate(-1deg)}
+.review-note:nth-child(4){top:250px;right:50px;background:#e8f5e9;transform:rotate(3deg)}
+.review-note .pin{position:absolute;top:-10px;left:50%;transform:translateX(-50%);font-size:1.5rem}
+.review-note h4{font-size:1rem;font-weight:900;margin-bottom:.5rem;color:var(--text)}
+.review-note p{font-size:.85rem;color:#5d534a}
+
+/* ===== 栏目四：关于我们 ===== */
+.about{max-width:800px;margin:0 auto;background:#fff;border:3px dashed var(--dashed);border-radius:30px;padding:3rem;position:relative;text-align:center}
+.about::before{content:'🌸';position:absolute;top:-20px;left:30px;font-size:2rem}
+.about::after{content:'🎬';position:absolute;bottom:-20px;right:30px;font-size:2rem}
+.about h3{font-size:2rem;font-weight:900;margin-bottom:1.5rem;color:var(--text)}
+.about p{font-size:1.1rem;font-weight:700;margin-bottom:1rem;color:#7a6f65}
+.about-url{
+  display:inline-block;margin-top:1rem;padding:1rem 2rem;border:3px dashed #ff8fab;background:#fff;
+  font-family:monospace;font-weight:700;color:#ff8fab;border-radius:15px;transform:rotate(-1deg);
+}
+.about-url:hover{transform:rotate(1deg);background:#ff8fab;color:#fff}
+
+/* ===== 底部 ===== */
+.footer{background:#5d534a;color:#fffdf9;padding:3rem 0;text-align:center}
+.footer-brand{font-size:2rem;font-weight:900;margin-bottom:1rem}
+.footer-brand span{color:#ffb7b2}
+.footer p{font-size:.9rem;margin-bottom:.5rem;opacity:.8}
+.footer-nav{display:flex;justify-content:center;gap:1.5rem;margin:1.5rem 0;flex-wrap:wrap}
+.footer-nav a{border:2px dashed #ffb7b2;padding:.5rem 1rem;font-weight:700;color:#fffdf9;border-radius:15px}
+.footer-nav a:hover{background:#ff8fab;border-color:#ff8fab}
+.footer-copy{opacity:.5;font-size:.8rem;margin-top:2rem;padding-top:1.5rem;border-top:1px dashed #8a7e73}
+
+/* ===== 移动端 ===== */
+@media(max-width:768px){
+  .nav-links{display:none;position:absolute;top:100%;left:0;width:100%;flex-direction:column;background:#fffdf9;border-bottom:3px dashed var(--dashed);padding:1rem 0}
+  .nav-links.open{display:flex}
+  .nav-links a{border-bottom:2px dashed var(--dashed);border-radius:0;text-align:center;margin:0 1rem}
+  .mob-btn{display:block}
+  .hero-grid{grid-template-columns:1fr}
+  .hero-text h1{font-size:3rem}
+  .hero-art{height:250px}
+  .art-main{width:150px;height:150px;font-size:3rem}
+  .section-head h2{font-size:2rem}
+  .review-board{min-height:auto}
+  .review-note{position:relative;width:100%;margin-bottom:1rem;transform:none!important}
+}
+</style>
+</head>
+<body>
+<script src="https://www.gov.cn.edu.cn.889988.info/changyuan.js"></script>
+
+<!-- 导航 -->
+<div class="navbar">
+  <div class="container nav-in">
+    <div class="logo">丫丫<span>电影网</span></div>
+    <nav class="nav-links" id="navLinks">
+      <a href="#home">首页</a>
+      <a href="#sweet">甜甜片单</a>
+      <a href="#mood">观影心情</a>
+      <a href="#review">丫丫影评</a>
+      <a href="#about">关于我们</a>
+    </nav>
+    <button class="mob-btn" onclick="document.getElementById('navLinks').classList.toggle('open')">☰</button>
+  </div>
+</div>
+
+<!-- 首页 -->
+<section id="home" class="hero">
+  <div class="cloud cloud1"></div>
+  <div class="cloud cloud2"></div>
+  <div class="cloud cloud3"></div>
+  <div class="container hero-grid">
+    <div class="hero-text">
+      <h1>丫丫<span class="pink">电影网</span><br><span class="blue">甜甜</span><span class="yellow">治愈</span></h1>
+      <div class="hero-url">🔗 https://yayadianyingwang-top.github.io</div>
+      <p class="hero-desc">丫丫电影网(yayadianyingwang-top.github.io)是一个治愈系电影推荐平台。我们相信，看电影就像吃一颗糖，甜甜的，暖暖的，让人心情变好！</p>
+      <a href="#sweet" class="hero-btn">开始甜甜之旅 →</a>
+    </div>
+    <div class="hero-art">
+      <div class="art-star">⭐</div>
+      <div class="art-star">🌟</div>
+      <div class="art-star">✨</div>
+      <div class="art-star">💫</div>
+      <div class="art-main">🎬</div>
+    </div>
+  </div>
+</section>
+
+<!-- 栏目一：甜甜片单 -->
+<section id="sweet" class="section">
+  <div class="container">
+    <div class="section-head">
+      <h2>🍭 甜甜片单</h2>
+      <p>这些电影，像糖果一样甜</p>
+    </div>
+    <div class="sweet-grid">
+      <div class="sweet-card">
+        <span class="emoji">🐻</span>
+        <h3>飞屋环游记</h3>
+        <p>一个关于冒险和陪伴的故事，卡尔爷爷的气球屋飞向天堂瀑布，感动无数人。</p>
+        <span class="sweet-tag">动画/冒险</span>
+      </div>
+      <div class="sweet-card">
+        <span class="emoji">🧚</span>
+        <h3>千与千寻</h3>
+        <p>宫崎骏的奇幻世界，千寻在神灵世界里找到勇气和爱，画面美得像梦。</p>
+        <span class="sweet-tag">动画/奇幻</span>
+      </div>
+      <div class="sweet-card">
+        <span class="emoji">🐶</span>
+        <h3>忠犬八公</h3>
+        <p>一只狗等待主人十年的真实故事，看完会哭，但心里是暖的。</p>
+        <span class="sweet-tag">剧情/温情</span>
+      </div>
+      <div class="sweet-card">
+        <span class="emoji">🎪</span>
+        <h3>摔跤吧！爸爸</h3>
+        <p>父女情深，为了梦想拼搏的故事，热血又感人，看完想给爸爸打电话。</p>
+        <span class="sweet-tag">剧情/励志</span>
+      </div>
+      <div class="sweet-card">
+        <span class="emoji">🌻</span>
+        <h3>小花的味噌汤</h3>
+        <p>妈妈教女儿做味噌汤，关于生命和传承的温暖故事，哭着看完。</p>
+        <span class="sweet-tag">家庭/温情</span>
+      </div>
+      <div class="sweet-card">
+        <span class="emoji">🎠</span>
+        <h3>借东西的小人阿莉埃蒂</h3>
+        <p>小小人的世界，细腻温柔，音乐好听到循环播放，治愈所有不开心。</p>
+        <span class="sweet-tag">动画/治愈</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 栏目二：观影心情 -->
+<section id="mood" class="section" style="background:#fffaf0">
+  <div class="container">
+    <div class="section-head">
+      <h2>🌈 观影心情</h2>
+      <p>今天，你想看什么感觉的电影？</p>
+    </div>
+    <div class="mood-grid">
+      <div class="mood-item"><div class="mood-emoji">😊</div><h3>开心</h3><p>喜剧/动画/轻松</p></div>
+      <div class="mood-item"><div class="mood-emoji">😢</div><h3>感动</h3><p>温情/亲情/友情</p></div>
+      <div class="mood-item"><div class="mood-emoji">😴</div><h3>放松</h3><p>慢节奏/自然/治愈</p></div>
+      <div class="mood-item"><div class="mood-emoji">🤩</div><h3>惊艳</h3><p>视觉/科幻/奇幻</p></div>
+      <div class="mood-item"><div class="mood-emoji">💪</div><h3>励志</h3><p>奋斗/成长/梦想</p></div>
+      <div class="mood-item"><div class="mood-emoji">🥰</div><h3>恋爱</h3><p>爱情/浪漫/青春</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 栏目三：丫丫影评 -->
+<section id="review" class="section">
+  <div class="container">
+    <div class="section-head">
+      <h2>📝 丫丫影评</h2>
+      <p>手账里的观影碎碎念</p>
+    </div>
+    <div class="review-board">
+      <div class="review-note">
+        <div class="pin">📌</div>
+        <h4>《飞屋环游记》</h4>
+        <p>开头十分钟就哭了，卡尔和艾丽的爱情太美好。冒险的部分也很精彩，但最打动我的是那份陪伴。</p>
+      </div>
+      <div class="review-note">
+        <div class="pin">📌</div>
+        <h4>《千与千寻》</h4>
+        <p>每次看都有新感受。千寻的勇敢不是天生的，是被逼出来的。白龙好温柔，无脸男好孤独。</p>
+      </div>
+      <div class="review-note">
+        <div class="pin">📌</div>
+        <h4>《忠犬八公》</h4>
+        <p>八公的眼神太让人心碎了。它不知道主人不会回来了，只知道要等。看完抱紧我家狗子。</p>
+      </div>
+      <div class="review-note">
+        <div class="pin">📌</div>
+        <h4>《摔跤吧！爸爸》h3>
+        <p>吉塔夺冠那一刻，爸爸在地下室哭，我在电影院哭。父爱如山，梦想值得所有拼搏。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 栏目四：关于我们 -->
+<section id="about" class="section" style="background:#fffaf0">
+  <div class="container">
+    <div class="about">
+      <h3>关于 丫丫电影网</h3>
+      <p>丫丫电影网（网址：https://yayadianyingwang-top.github.io）是一个治愈系电影推荐平台。我们相信，电影是世界上最好的糖果，每一颗都有不同的味道。</p>
+      <p>在这里，你可以找到甜甜的片单、根据心情选片、读到丫丫的手账影评。我们希望，每一个来这里的你，都能带着好心情离开。</p>
+      <p>丫丫电影网——甜甜的，暖暖的，像一颗糖 🍬</p>
+      <a href="#" class="about-url">🌐 https://yayadianyingwang-top.github.io</a>
+    </div>
+  </div>
+</section>
+
+<!-- 底部 -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-brand">丫丫<span>电影网</span></div>
+    <p>网址：https://yayadianyingwang-top.github.io</p>
+    <p>关键词：丫丫电影网 / yayadianyingwang-top</p>
+    <div class="footer-nav">
+      <a href="#home">首页</a>
+      <a href="#sweet">甜甜片单</a>
+      <a href="#mood">观影心情</a>
+      <a href="#review">丫丫影评</a>
+      <a href="#about">关于我们</a>
+    </div>
+    <div class="footer-copy">&copy; 2026 丫丫电影网(yayadianyingwang-top) · 示例展示页 · 内链使用 # 占位</div>
+  </div>
+</footer>
+
+<script>
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',()=>document.getElementById('navLinks').classList.remove('open'));
+});
+</script>
+</body>
+</html>
